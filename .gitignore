@@ -1,0 +1,8 @@
+.DS_Store
+.idea/
+*.pyc
+token.pickle
+client_secrets.json
+settings.py
+zappa_settings.json
+*.zip
