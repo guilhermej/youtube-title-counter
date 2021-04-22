@@ -1,1 +1,3 @@
 VIDEO_ID = "VIDEO_ID_FROM_YOUTUBE"
+VIDEO_TAGS = "tags"
+VIDEO_DESCRIPTION = "description"

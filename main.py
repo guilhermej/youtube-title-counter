@@ -4,7 +4,7 @@ import pickle
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
-from settings import VIDEO_ID
+from settings import *
 
 
 def auth_on_youtube():
@@ -54,13 +54,16 @@ def get_video_views(client, video_id):
     return int(response["items"][0]["statistics"]["viewCount"])
 
 
-def update_video_title(client, video_id, title):
+def update_video_title(client, video_id, title, description, tags):
     response = client.videos().update(
         part="snippet",
         body={"id": video_id,
               "snippet": {
                   "title": title,
-                  "categoryId": 28, }
+                  "categoryId": 28,
+                  "description": description,
+                  "tags": tags,
+                  "defaultLanguage": "pt_BR"},
               }
     ).execute()
     print(response)
@@ -71,7 +74,8 @@ def main():
     if credentials:
         client = get_client(credentials)
         video_views = get_video_views(client, VIDEO_ID)
-        update_video_title(client, VIDEO_ID, "Este Vídeo Tem {} Visualizações".format(video_views))
+        update_video_title(client, VIDEO_ID, "Este Vídeo Tem {} Visualizações".format(video_views), VIDEO_DESCRIPTION,
+                           VIDEO_TAGS)
 
 
 if __name__ == "__main__":
